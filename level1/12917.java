@@ -29,6 +29,6 @@ class Solution {
         char[] sol = s.toCharArray();
         Arrays.sort(sol);
         return new StringBuilder(new String(sol)).reverse().toString();
-        /*
+        */
     }
 }
