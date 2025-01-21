@@ -1,36 +1,39 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/42747
-import java.util.HashMap;
-
+import java.util.Arrays;
 class Solution {
-    public int solution(String[] want, int[] number, String[] discount) {
-        int totalCount = want.length;
-        HashMap<String, Integer> wantMap = new HashMap<>();
-        HashMap<String, Integer> 10dayMap = new HashMap<>();
-
-        for(int i = 0; i < totalCount; i++){
-            wantMap.put(want[i], wantMap.getOrDefault(want[i], 0)+1);
-        }
-
-        for(int i=0; i<disount.length; i++){
-            if(10dayMap.size() >= totalCount)
-            10dayMap.put(disount[i-totalCount],
-                    10dayMap.get(disount[i-totalCount])-1);
-
-            10day_map.put(disount[i], 10day_map.getOrDefault(disount[i], 0)+1);
-
-            if(10dayMap.size() >= totalCount){
-                if(check10DayItem(10dayMap, wantMap))
-                    return i-totalCount+2;
+    public int solution(int[] citations) {
+        int idx = 0;
+        Arrays.sort(citations);
+        if(citations[0] > citations.length)
+            idx = citations[0];
+        else if(citations[citations.length-1] > citations.length)
+            idx = citations.length;
+        else
+            idx = citations[citations.length-1];
+        for(int i = idx; i >= 0; i--){
+            int overCount = 0;
+            for(int citation : citations){
+                if(i <= citation)
+                    overCount++;
             }
+            if(overCount>=i && citations.length-overCount <= i)
+                return i;
         }
         return 0;
     }
-
-    private boolean check10DayItem(HashMap<> 10dayMap, HashMap<> wantMap){
-        for(String key : wantMap.keySet()){
-            if(wantMap.get(key) != 10dayMap.get(key))
-            return false;
+}
+//더 나은 코드
+/*
+import java.util.Arrays;
+class Solution {
+    public int solution(int[] citations) {
+        int answer = 0;
+        Arrays.sort(citations);
+        for(int i=0; i<citations.length; i++){
+            int smaller = Math.min(citations[i], citations.length-i);
+            answer = Math.max(answer, smaller);
         }
-        return true;
+        return answer;
     }
 }
+*/
